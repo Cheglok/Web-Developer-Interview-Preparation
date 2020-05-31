@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson3_JS</title>
+</head>
+<body>
+<h2>Задание 5</h2>
+<a class="a">Я элемент а, нажми на меня</a>
+<br>
+<br>
+<h2>Задание 6, мы ползающие элементы</h2>
+<div class="one" style="width: 50px; height: 50px; background-color: yellow; position: relative">div class one</div>
+<div class="one" style="width: 50px; height: 50px; background-color: yellow;  position: relative">div class one</div>
+<div class="two" style="width: 50px; height: 50px; background-color: #ccc;  position: relative">div class two</div>
+<p class="two" style =" position: relative">p class two</p>
+
+<h2>Задание 7</h2>
+<div class="red" style="width: 50px; height: 50px; background-color: red; position: relative"><span>div class red</span></div>
+    <script>
+        // 1. Что выведет alert(typeof NaN); ?
+        //     Выведет - object, это напоминают в методичке)
+        // Упц, я ужасно невнимательный, перепутал с Null) Выводит number
+        // -----------------------------------------------------------------
+
+            // 2. Что выведет alert(NaN === NaN); ?
+        // false, NaN не может быть равно ничему.
+        // -----------------------------------------------------------------
+
+            // 3. 0.1 + 0.2 == 0.3 ?
+            // false, проблема операций с числами с плавающей запятой
+            // -----------------------------------------------------------------
+
+        // 4. Какой тип будет иметь переменная a, если она создается при помощи следующего кода:
+        //     var a = "a,b".split(',');
+        //     Object. результатом операции split является массив, а в JS массивы имеют тип данных object
+        // -----------------------------------------------------------------
+
+        // 5. Сделать так, чтобы при нажатии на элемент <а> алертом выводилось «Hello world!».
+        function sayHello() {
+            alert("Hello world");
+        }
+        document.querySelector("a").addEventListener("click", sayHello);
+
+        // -----------------------------------------------------------------
+
+        // 6. Найти все элементы div с классом one, а также все элементы p с классом two. Затем добавить им всем класс three и визуально плавно спустить вниз.
+        // -----------------------------------------------------------------
+        let domElementsArray = document.querySelectorAll("div.one, p.two"); //коллективный селектор
+        domElementsArray.forEach((el) => el.classList.add("three"));
+
+//Отсюда мне пришлось искать решение в интернете для этого задания
+        let start = Date.now(); // запомнить время начала
+
+        let timer = setInterval(function() {
+            // сколько времени прошло с начала анимации?
+            let timePassed = Date.now() - start;
+
+            if (timePassed >= 2000) {
+                clearInterval(timer); // закончить анимацию через 2 секунды
+                domElementsArray.forEach((el) => el.style.top = '0px');
+                return;
+            }
+            domElementsArray.forEach((el) => draw(timePassed, el));
+            // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+        }, 20);
+
+        // в то время как timePassed идёт от 0 до 2000
+        // top изменяет значение от 0px до 400px
+        function draw(timePassed, el) {
+            el.style.top = timePassed/10 + 'px';
+        }
+
+        // 7. Выбрать видимый div с именем red, который содержит тег span.
+        let elementsArray = document.querySelectorAll("div.red"); //Найдём все дивы с классом red
+        elementsArray.forEach((el) => {  //Переберём коллекцию DOM-элементов
+            if(el.style.display != "none" && el.style.visibility != "hidden" && el.style.opacity != "0") { //Проверка на видимость
+                if (el.innerHTML.includes("<span>")) { //Проверка на содержание внутри себя тега Span
+                    console.log(el);
+                }
+            }
+        })
+        // -----------------------------------------------------------------
+
+        // 8. Привести пример замыкания.
+
+        let closure = () => {let x = 15}
+        // -----------------------------------------------------------------
+
+        // 9. Написать функцию, которая уменьшает или увеличивает указанное время на заданное количество минут, например:
+        // changeTime('10:00', 1) //return '10:01'
+        // changeTime('10:00', -1) //return '09:59'
+        // changeTime('23:59', 1) //return '00:00'
+        // changeTime('00:00', -1) //return '23:59'
+        // -----------------------------------------------------------------
+
+        // 10. Написать функцию, возвращающую градус, на который указывают часовая и минутная стрелки в зависимости от времени, например:
+        // clock_degree("00:00") returns : "360:360"
+        // clock_degree("01:01") returns : "30:6"
+        // clock_degree("00:01") returns : "360:6"
+        // clock_degree("01:00") returns : "30:360"
+        // clock_degree("01:30") returns : "30:180"
+        // clock_degree("24:00") returns : "Check your time !"
+        // clock_degree("13:60") returns : "Check your time !"
+        // clock_degree("20:34") returns : "240:204"
+        // -----------------------------------------------------------------
+
+        // 11. Написать простую игру «Угадай число». Программа загадывает случайное число от 0 до 100. Игрок должен вводить предположения и получать ответы «Больше», «Меньше» или «Число угадано».
+    </script>
+</body>
+</html>
