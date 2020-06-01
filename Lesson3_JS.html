@@ -9,7 +9,8 @@
 <a class="a">Я элемент а, нажми на меня</a>
 <br>
 <br>
-<h2>Задание 6, мы ползающие элементы</h2>
+<h2>Задание 6</h2>
+<button class="crawlingElements">Запустить элементы</button>
 <div class="one" style="width: 50px; height: 50px; background-color: yellow; position: relative">div class one</div>
 <div class="one" style="width: 50px; height: 50px; background-color: yellow;  position: relative">div class one</div>
 <div class="two" style="width: 50px; height: 50px; background-color: #ccc;  position: relative">div class two</div>
@@ -17,59 +18,71 @@
 
 <h2>Задание 7</h2>
 <div class="red" style="width: 50px; height: 50px; background-color: red; position: relative"><span>div class red</span></div>
-    <script>
+<h2>Задание 11</h2>
+<button class="findNumberGame">Сыграть в угадайку</button>
+<script>
         // 1. Что выведет alert(typeof NaN); ?
         //     Выведет - object, это напоминают в методичке)
         // Упц, я ужасно невнимательный, перепутал с Null) Выводит number
         // -----------------------------------------------------------------
 
+
             // 2. Что выведет alert(NaN === NaN); ?
         // false, NaN не может быть равно ничему.
         // -----------------------------------------------------------------
 
-            // 3. 0.1 + 0.2 == 0.3 ?
-            // false, проблема операций с числами с плавающей запятой
-            // -----------------------------------------------------------------
+
+        // 3. 0.1 + 0.2 == 0.3 ?
+        // false, проблема операций с числами с плавающей запятой
+        // -----------------------------------------------------------------
+
 
         // 4. Какой тип будет иметь переменная a, если она создается при помощи следующего кода:
         //     var a = "a,b".split(',');
         //     Object. результатом операции split является массив, а в JS массивы имеют тип данных object
         // -----------------------------------------------------------------
 
+
         // 5. Сделать так, чтобы при нажатии на элемент <а> алертом выводилось «Hello world!».
         function sayHello() {
             alert("Hello world");
         }
         document.querySelector("a").addEventListener("click", sayHello);
-
         // -----------------------------------------------------------------
+
 
         // 6. Найти все элементы div с классом one, а также все элементы p с классом two. Затем добавить им всем класс three и визуально плавно спустить вниз.
-        // -----------------------------------------------------------------
-        let domElementsArray = document.querySelectorAll("div.one, p.two"); //коллективный селектор
-        domElementsArray.forEach((el) => el.classList.add("three"));
+        document.querySelector(".crawlingElements").addEventListener("click", crawlElements);
 
-//Отсюда мне пришлось искать решение в интернете для этого задания
-        let start = Date.now(); // запомнить время начала
+        function crawlElements() {
+            let domElementsArray = document.querySelectorAll("div.one, p.two"); //коллективный селектор
+            domElementsArray.forEach((el) => el.classList.add("three"));
 
-        let timer = setInterval(function() {
-            // сколько времени прошло с начала анимации?
-            let timePassed = Date.now() - start;
+            //Отсюда мне пришлось искать решение в интернете для этого задания
+            let start = Date.now(); // запомнить время начала
 
-            if (timePassed >= 2000) {
-                clearInterval(timer); // закончить анимацию через 2 секунды
-                domElementsArray.forEach((el) => el.style.top = '0px');
-                return;
+            let timer = setInterval(function() {
+                // сколько времени прошло с начала анимации?
+                let timePassed = Date.now() - start;
+
+                if (timePassed >= 2000) {
+                    clearInterval(timer); // закончить анимацию через 2 секунды
+                    domElementsArray.forEach((el) => el.style.top = '0px');
+                    return;
+                }
+                domElementsArray.forEach((el) => draw(timePassed, el));
+                // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+            }, 20);
+
+            // в то время как timePassed идёт от 0 до 2000
+            // top изменяет значение от 0px до 400px
+            function draw(timePassed, el) {
+                el.style.top = timePassed/10 + 'px';
             }
-            domElementsArray.forEach((el) => draw(timePassed, el));
-            // отрисовать анимацию на момент timePassed, прошедший с начала анимации
-        }, 20);
-
-        // в то время как timePassed идёт от 0 до 2000
-        // top изменяет значение от 0px до 400px
-        function draw(timePassed, el) {
-            el.style.top = timePassed/10 + 'px';
         }
+        // -----------------------------------------------------------------
+
+
 
         // 7. Выбрать видимый div с именем red, который содержит тег span.
         let elementsArray = document.querySelectorAll("div.red"); //Найдём все дивы с классом red
@@ -100,38 +113,39 @@
         // changeTime('00:00', -1) //return '23:59'
 
         function changeTime(time, change) {
-            if(time.length != 5 || typeof (change) != "number") {
-                console.log("Введите корректные значения");
-                return;
+            if(time.length != 5 || typeof (change) != "number") { //Обработка ошибок ввода
+                return ("Введите корректные значения");
             }
+
             let timeArray = time.split(":"); //переведём строку в массив и извлечём значения часов и минут
             let min = timeArray[1];
             let hour = timeArray[0];
 
-            let hourDiff = Math.floor(change / 60);
+            let hourDiff;
+            if (change >=  0) {           // изменим значение часа
+                hourDiff = Math.floor(change / 60);
+            } else {
+                hourDiff = Math.ceil(change / 60);
+            }
             hour = (+hour + hourDiff);
+
             let minDiff = change % 60;
             min = +min + minDiff; //Увеличиваем значение минут
 
-            console.log(hourDiff);
-            console.log(minDiff);
-            console.log(min);
-            console.log(hour);
-
 
             if (min > 59) {        //нормализуем значение минут
-                min = min - 60;
+                min = min - 60;    // Больше 60 минут- переходим на следующий час
                 hour++;
-            }
-            if (min < 0) {
+            } else if (min < 0) {
                 min = 60 + min;
-                hour--;
+                hour--;             //Меньше 0 минут - переходим на предыдущий час
             }
+            hour = hour % 24; // отбрасываем лишние сутки
+
 
             if (hour > 23) {        //Если изменение минут повлекло за собой изменение часов, то их тоже нужно нормализовать
                 hour = hour - 24;
-            }
-            if (hour < 0) {
+            } else if (hour < 0) {
                 hour = 24 + hour;
             }
 
@@ -141,16 +155,16 @@
             if(hour < 10) {
                 hour = "0" + hour;
             }
-            timeArray[1] = min;
-            timeArray[0] = hour;
-            let timeString = timeArray.join(":");
-            console.log(timeString);
+
+            let timeString = hour + ':' + min;
+            return(timeString);
 
         }
-        changeTime('10:45', 15);
+        console.log(changeTime('10:45', 15));
         // -----------------------------------------------------------------
 
-        // 10. Написать функцию, возвращающую градус, на который указывают часовая и минутная стрелки в зависимости от времени, например:
+        // 10. Написать функцию, возвращающую градус, на который указывают часовая и минутная стрелки
+        // в зависимости от времени, например:
         // clock_degree("00:00") returns : "360:360"
         // clock_degree("01:01") returns : "30:6"
         // clock_degree("00:01") returns : "360:6"
@@ -159,10 +173,52 @@
         // clock_degree("24:00") returns : "Check your time !"
         // clock_degree("13:60") returns : "Check your time !"
         // clock_degree("20:34") returns : "240:204"
+
+        function clock_degree(time) { // Не вижу смысла в написании 360, ведь это же 0, но сделаю согласно заданию
+
+            let timeArray = time.split(":"); //переведём строку в массив и извлечём значения часов и минут
+            let min = +timeArray[1];
+            let hour = +timeArray[0];
+
+            if(hour >= 24 || hour < 0 || min >= 60 || min < 0) {
+                return "Check your time !";
+            }
+
+            hour = hour % 12; // Переведём часы в 12-часовой формат
+            let hourDegree = hour * 30;
+            let minDegree = min * 6;
+            if (hourDegree == 0) {
+                hourDegree = 360;
+            }
+            if (minDegree == 0) {
+                minDegree = 360;
+            }
+            return hourDegree + ':' + minDegree;
+        }
+        console.log(clock_degree("00:00"));
         // -----------------------------------------------------------------
 
         // 11. Написать простую игру «Угадай число». Программа загадывает случайное число от 0 до 100.
         // Игрок должен вводить предположения и получать ответы «Больше», «Меньше» или «Число угадано».
+        document.querySelector(".findNumberGame").addEventListener("click", findNumber);
+
+        function findNumber() {
+            let programNumber = Math.floor(Math.random() * 101); // 101 т.к. 100 включительно
+            let userNumber = "";
+            console.log(programNumber);
+            while (+userNumber != programNumber) {
+                userNumber = +prompt("Попробуйте угадать число от 0 до 100. Введи 666 для выхода");
+                if (userNumber == 666) {
+                    return;
+                }
+                if (userNumber > programNumber) {
+                    alert("Загаданное число меньше")
+                } else if (userNumber < programNumber) {
+                    alert("Загаданное число больше")
+                } else alert("Вы угадали, загадано число " + programNumber)
+            }
+        }
+
     </script>
 </body>
 </html>
