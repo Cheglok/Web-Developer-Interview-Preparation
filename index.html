@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML/CSS</title>
+</head>
+<style>
+    table {
+        background-color: #ccc;
+        border: 1px solid black;
+    }
+    td {
+        border: 1px solid blue;
+        width: 30px;
+        height: 20px;
+    }
+    table div {
+        border: 1px solid black;
+    }
+    /*.wrapper {*/
+    /*    width: 500px;*/
+    /*    height: 500px;*/
+    /*}*/
+    .wrapper{
+        position: relative;
+        overflow: hidden;
+        height: 600px;
+        width: 500px;
+    }
+    .wrapper div {
+        position: absolute;
+    }
+    .sky {
+        height: 400px;
+        width: 500px;
+        background-color: lightblue;
+        animation: sky-movement 10s infinite;
+    }
+    @keyframes sky-movement {
+        0% {background-color: #180c63}
+        10% {background-color: lightblue;}
+        60% {background-color: lightblue;}
+        70% {background-color: #180c63}
+        100% {background-color: #180c63}
+    }
+    .ground {
+        height: 200px;
+        width: 500px;
+        background-color: lightgreen;
+        top: 400px;
+        animation: ground-movement 10s infinite;
+    }
+    @keyframes ground-movement {
+        0% {background-color: #07590f}
+        10% {background-color: lightgreen;}
+        60% {background-color: lightgreen;}
+        70% {background-color: #07590f}
+        100% {background-color: #07590f}
+    }
+    .home {
+        height: 100px;
+        width: 100px;
+        background-color: saddlebrown;
+        top: 350px;
+        left: 100px;
+    }
+    .home::before {
+        content: "";
+        position: absolute;
+        top: -140px;
+        left: -20px;
+        border: 70px solid transparent;
+        border-bottom: 70px solid cornflowerblue;
+    }
+    .window {
+        width: 55px;
+        height: 50px;
+        background-color: white;
+        top: 25px;
+        left: 25px;
+    }
+    .window::before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 20px;
+        height: 40px;
+        background-color: cornflowerblue;
+        animation: window-movement 10s infinite;
+    }
+    .window::after {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 30px;
+        width: 20px;
+        height: 40px;
+        background-color: cornflowerblue;
+        animation: window-movement 10s infinite;
+    }
+    @keyframes window-movement {
+        0% {background-color: #d99f0d}
+        10% {background-color: cornflowerblue;}
+        60% {background-color: cornflowerblue;}
+        70% {background-color: #d99f0d}
+        100% {background-color: #d99f0d}
+    }
+    .cloud {
+        height: 100px;
+        width: 150px;
+        background-color: white;
+        top: 100px;
+        left: 100px;
+        border-radius: 80px 100px 80px 70px;
+        border-right: 1px solid blue;
+        z-index: 2;
+        animation: cloud-movement 10s infinite;
+    }
+    @keyframes cloud-movement {
+        0% {top: 80px; left: 400px}
+        20% {top: 100px; left: 230px;
+            background-color: white;}
+        50% {top: 100px; left: 230px;
+            background-color: #4f5e69;}
+        70% {top: 80px; left: 50px; background-color: white;}
+        100% {top: 30px; left: -200px}
+
+    }
+    .cloud::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: -40px;
+        width: 80px;
+        height: 100px;
+        background-color: inherit;
+        border-radius: 50%;
+        border-bottom: 1px solid blue;
+    }
+    .cloud::after {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left: 40px;
+        width: 80px;
+        height: 100px;
+        background-color: inherit;
+        border-radius: 50%;
+        border-top: 1px solid blue;
+    }
+    .sun {
+        width: 80px;
+        height: 80px;
+        background-color: yellow;
+        border-radius: 50%;
+        animation: sun-movement 10s infinite;
+    }
+    @keyframes sun-movement {
+        0% {top: 300px; left: -50px}
+        25% {top: 100px; left: 200px}
+        50% {top: 100px; left: 200px}
+        70% {top: 200px; left: 550px}
+        100% {top: 200px; left: 550px}
+    }
+    .tree {
+        border: 10px solid transparent;
+        border-bottom: 100px solid black;
+        top: 300px;
+        left: 300px;
+    }
+    .tree::before {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 90px;
+        border-radius: 50%;
+        background-color: darkgreen;
+        top: -45px;
+        left: -30px;
+        animation: tree-movement 10s infinite;
+    }
+
+    @keyframes tree-movement {
+        0% {background-color: transparent; height: 0px; top: 0px}
+        25% {background-color: darkgreen; height: 90px; top: -45px}
+        27% {}
+        30% {background-color: darkgreen; height: 90px;}
+        35% {background-color: #f7510a; height: 120px;}
+        40% {background-color: transparent;}
+        100% {background-color: transparent;}
+    }
+    .lightning {
+        top: 187px;
+        left: 300px;
+        z-index: 3;
+        animation: lightning-movement 10s infinite;
+    }
+    .lightning::after {
+        content: "";
+        position: absolute;
+        animation: lightning-movement 10s infinite;
+    }
+
+    @keyframes lightning-movement {
+        0% {border: 5px solid transparent;}
+        25% {border: 5px solid transparent;}
+        27% {border-top: 50px solid #e5f533;}
+        30% {border: 5px solid transparent;}
+        32% {border-top: 50px solid #e5f533;}
+        35% {border: 5px solid transparent;}
+        70% {border: 5px solid transparent;}
+        100% {border: 5px solid transparent;}
+    }
+</style>
+<body>
+
+<div class="wrapper">
+    <div class="sky"></div>
+    <div class="ground"></div>
+    <div class="home">
+        <div class="window"></div>
+    </div>
+    <div class="cloud"></div>
+    <div class="sun"></div>
+    <div class="tree"></div>
+    <div class="lightning"></div>
+
+</div>
+
+
+
+    <h3>1. Что такое < ol >, < ul > и < li >? </h3>
+    <p>
+        ol - ordered list - упорядоченный список, с порядковыми номерами элементов. <br>
+        ul - unordered list - неупорядоченный список, по умолчанию с точками перед элементами. <br>
+        li - list item - элемент списка, может быть только внутри тегов ul или ol
+    </p>
+    <h3>2. Сверстать сложную таблицу с объединением строк и столбцов.</h3>
+    <table>
+        <tr>
+            <td colspan="4"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td rowspan="2"></td>
+            <td></td>
+            <td colspan="3" rowspan="2"></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+   <h3> 3. В каком регистре лучше писать HTML-код?</h3>
+    <p>В нижнем регистре, это общепринятая практика, я вообще не видел написания в верхнем регистре</p>
+    <h3>4. Как убрать синюю рамку вокруг картинки-ссылки?</h3>
+    <a href="http:\\www.vk.com"><img src="https://i.pinimg.com/236x/2d/dc/25/2ddc25914e2ae0db5311ffa41781dda1.jpg" alt="unicorn" width="50" height="50"></a>
+    <p>Вообще, для того чтоб убрать рамку нужно прописать border=none, но я не вижу чтоб появилась какая-то рамка. Может это уже вшито в браузеры, убирать рамки вокруг картинок?</p>
+    <h3>5. Обязательно ли писать alt в < img >?</h3>
+    <p>Да, это правила хорошего кода. Правда, работать будет и без alt</p>
+    <h3>6. Что такое html-entities?</h3>
+    <p>Сущности, набор спецсимволов</p>
+    <h3>7. Как убрать подчеркивание для всех ссылок на странице?</h3>
+    <p>Прописать в теге style или вневнем CSS-файле "a {text-decoration: none}"
+    Если CSS-файл подключен к нескольким страницам, то можно за каскадом "page.a {text-decoration: none}"
+    </p>
+    <h3>8. Что делает свойство clear?</h3>
+    <p>Управляет режимом обтекания элемента прочим контентом, запрещает обтекание с указанной стороны</p>
+    <h3>9. Есть ячейка таблицы, в ней 3 дива, в каждом диве – по слову. На первый див применен стиль float: left;
+        на третий – float: right. Что нужно применить на второй див, чтобы все три надписи/дивы были в одной
+        горизонтальной строке, то есть первый имел бы выравнивание по левому краю,
+        третий – по правому, а второй – по центру?</h3>
+    <table width="200px">
+        <tr>
+            <td>
+                <div style="float: left">lorem</div>
+                <div style="float: right">dolor</div>
+                <div style="margin: 0 auto; width: 50px">Ipsum</div>
+            </td>
+        </tr>
+    </table>
+    <p>Здесь я поменял второй и третий блок местами в коде и задал второму ширину и margin:auto. Более разумного решения не нашёл(</p>
+
+    <h3>10. Перечислить по пять знакомых вам псевдоклассов и псевдостилей с указанием их функционала.</h3>
+    Псевдостили
+    <ul>
+        <li>
+            :hover - задать стиль при наведении
+        </li>
+        <li>
+            :active - стили ссылки в момент нажатия
+        </li>
+        <li>
+            :visited - стили посещённой ссылки
+        </li>
+        <li>
+            :first-letter - задать стили первой буквы абзаца
+        </li>
+        <li>
+            :first-line - задать стили первой строки абзаца
+        </li>
+    </ul>
+    Псевдоклассы
+    <ul>
+        <li>
+            :first-child, :last-child - стили для первого или последнего элемента внутри родителя
+        </li>
+        <li>
+            :first-of-type, :last-of-type - стили для первого или последнего элемента определённого типа внутри родителя
+        </li>
+        <li>
+            :not - стили для элементов, в котором нет указанного селектора
+        </li>
+        <li>
+            :checked - задать по умолчанию выбранный переключатель или флажок
+        </li>
+        <li>
+            :disabled - заблокировать элемент формы
+        </li>
+    </ul>
+    <h3>11. Нарисовать при помощи CSS3 дом на фоне неба и плывущие облака.</h3>
+
+</body>
+</html>
