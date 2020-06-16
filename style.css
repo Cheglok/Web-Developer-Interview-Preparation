@@ -1,0 +1,203 @@
+table {
+    background-color: #ccc;
+    border: 1px solid black;
+}
+td {
+    border: 1px solid blue;
+    width: 30px;
+    height: 20px;
+}
+table div {
+    border: 1px solid black;
+}
+.wrapper{
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+    width: 500px;
+}
+.wrapper div {
+    position: absolute;
+}
+.sky {
+    height: 400px;
+    width: 500px;
+    background-color: lightblue;
+    animation: sky-movement 10s infinite;
+}
+@keyframes sky-movement {
+    0% {background-color: #180c63}
+    10% {background-color: lightblue;}
+    60% {background-color: lightblue;}
+    70% {background-color: #180c63}
+    100% {background-color: #180c63}
+}
+.ground {
+    height: 200px;
+    width: 500px;
+    background-color: lightgreen;
+    top: 400px;
+    animation: ground-movement 10s infinite;
+}
+@keyframes ground-movement {
+    0% {background-color: #07590f}
+    10% {background-color: lightgreen;}
+    60% {background-color: lightgreen;}
+    70% {background-color: #07590f}
+    100% {background-color: #07590f}
+}
+.home {
+    height: 100px;
+    width: 100px;
+    background-color: saddlebrown;
+    top: 350px;
+    left: 100px;
+}
+.home::before {
+    content: "";
+    position: absolute;
+    top: -140px;
+    left: -20px;
+    border: 70px solid transparent;
+    border-bottom: 70px solid cornflowerblue;
+}
+.window {
+    width: 55px;
+    height: 50px;
+    background-color: white;
+    top: 25px;
+    left: 25px;
+}
+.window::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 40px;
+    background-color: cornflowerblue;
+    animation: window-movement 10s infinite;
+}
+.window::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    width: 20px;
+    height: 40px;
+    background-color: cornflowerblue;
+    animation: window-movement 10s infinite;
+}
+@keyframes window-movement {
+    0% {background-color: #d99f0d}
+    10% {background-color: cornflowerblue;}
+    60% {background-color: cornflowerblue;}
+    70% {background-color: #d99f0d}
+    100% {background-color: #d99f0d}
+}
+.cloud {
+    height: 100px;
+    width: 150px;
+    background-color: white;
+    top: 100px;
+    left: 100px;
+    border-radius: 80px 100px 80px 70px;
+    border-right: 1px solid blue;
+    z-index: 2;
+    animation: cloud-movement 10s infinite;
+}
+@keyframes cloud-movement {
+    0% {top: 80px; left: 400px}
+    20% {top: 100px; left: 230px;
+        background-color: white;}
+    50% {top: 100px; left: 230px;
+        background-color: #4f5e69;}
+    70% {top: 80px; left: 50px; background-color: white;}
+    100% {top: 30px; left: -200px}
+
+}
+.cloud::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -40px;
+    width: 80px;
+    height: 100px;
+    background-color: inherit;
+    border-radius: 50%;
+    border-bottom: 1px solid blue;
+}
+.cloud::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 40px;
+    width: 80px;
+    height: 100px;
+    background-color: inherit;
+    border-radius: 50%;
+    border-top: 1px solid blue;
+}
+.sun {
+    width: 80px;
+    height: 80px;
+    background-color: yellow;
+    border-radius: 50%;
+    animation: sun-movement 10s infinite;
+}
+@keyframes sun-movement {
+    0% {top: 300px; left: -50px}
+    25% {top: 100px; left: 200px}
+    50% {top: 100px; left: 200px}
+    70% {top: 200px; left: 550px}
+    100% {top: 200px; left: 550px}
+}
+.tree {
+    border: 10px solid transparent;
+    border-bottom: 100px solid black;
+    top: 300px;
+    left: 300px;
+}
+.tree::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: darkgreen;
+    top: -45px;
+    left: -30px;
+    animation: tree-movement 10s infinite;
+}
+
+@keyframes tree-movement {
+    0% {background-color: transparent; height: 0px; top: 0px}
+    25% {background-color: darkgreen; height: 90px; top: -45px}
+    27% {}
+    30% {background-color: darkgreen; height: 90px;}
+    35% {background-color: #f7510a; height: 120px;}
+    40% {background-color: transparent;}
+    100% {background-color: transparent;}
+}
+.lightning {
+    top: 187px;
+    left: 300px;
+    z-index: 3;
+    animation: lightning-movement 10s infinite;
+}
+.lightning::after {
+    content: "";
+    position: absolute;
+    animation: lightning-movement 10s infinite;
+}
+
+@keyframes lightning-movement {
+    0% {border: 5px solid transparent;}
+    25% {border: 5px solid transparent;}
+    27% {border-top: 50px solid #e5f533;}
+    30% {border: 5px solid transparent;}
+    32% {border-top: 50px solid #e5f533;}
+    35% {border: 5px solid transparent;}
+    70% {border: 5px solid transparent;}
+    100% {border: 5px solid transparent;}
+}
